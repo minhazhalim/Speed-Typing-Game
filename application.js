@@ -8,9 +8,9 @@ const settings = document.getElementById('settings');
 const settingsForm = document.getElementById('settings-form');
 const difficulty = document.getElementById('difficulty');
 const words = ['sigh','tense','airplane','ball','pies','juice','warlike','bad','north','dependent','steer','silver','highfalutin','superficial','quince','eight','feeble','admit','drag','loving'];
-let randomWord;
 let scoreLevel = 0;
 let timeLevel = 20;
+let randomWord;
 let difficultyLevel = localStorage.getItem('difficulty') !== null ? localStorage.getItem('difficulty') : 'medium';
 difficulty.value = localStorage.getItem('difficulty') !== null ? localStorage.getItem('difficulty') : 'medium';
 text.focus();
@@ -27,14 +27,6 @@ function updateScore(){
      scoreLevel++;
      score.innerHTML = scoreLevel;
 }
-function updateTime(){
-     timeLevel--;
-     time.innerHTML = timeLevel + 's';
-     if(timeLevel === 0){
-          clearInterval(timeInterval);
-          gameOver();
-     }
-}
 function gameOver(){
      endGameContainer.innerHTML = `
           <h1>time ran out</h1>
@@ -42,6 +34,14 @@ function gameOver(){
           <button onclick="location.reload()">reload</button>
      `;
      endGameContainer.style.display = 'flex';
+}
+function updateTime(){
+     timeLevel--;
+     time.innerHTML = timeLevel + 's';
+     if(timeLevel === 0){
+          clearInterval(timeInterval);
+          gameOver();
+     }
 }
 text.addEventListener('input',event => {
      const insertedText = event.target.value;
